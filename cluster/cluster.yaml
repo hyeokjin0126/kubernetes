@@ -1,0 +1,44 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: <EKS_CLUSTER_NAME>
+  version: "<EKS_CLUSTER_VERSION>"
+  region: <<REGION_CODE>>
+
+cloudWatch:
+  clusterLogging:
+    enableTypes: ["*"]
+
+iam:
+  withOIDC: true
+  serviceAccounts:
+  - metadata:
+      name: aws-load-balancer-controller
+      namespace: kube-system
+    wellKnownPolicies:
+      awsLoadBalancerController: true
+  - metadata:
+      name: cert-manager
+      namespace: cert-manager
+    wellKnownPolicies:
+      certManager: true
+
+vpc:
+  subnets:
+    public:
+      <REGION_CODE>a: { id: <SUBNET_ID> }
+      <REGION_CODE>b: { id: <SUBNET_ID> }
+    private:
+      <REGION_CODE>a: { id: <SUBNET_ID> }
+      <REGION_CODE>b: { id: <SUBNET_ID> }
+
+managedNodeGroups:
+  - name: <NODEGROUP_NAME>
+    labels: { <KEY>: <VALUE> }
+    instanceName: <NODEGROUP_NAME>
+    instanceType: <INSTANCE_TYPE>
+    desiredCapacity: 2
+    minSize: 2
+    maxSize: 20
+    privateNetworking: true
