@@ -14,15 +14,15 @@ spec:
       labels:
         <POD_KEY>: <POD_VALUE>
     spec:
+      nodeSelector:
+        <NODE_KEY>: <NODE_VALUE>
+      serviceAccountName: <SERVICEACCOUNT_NAME>
       tolerations:
       - key: "<NODE_KEY>"
         operator: "Equal"
         value: "<NODE_VALUE>"
         effect: "NoSchedule"
-
-      nodeSelector:
-        node: app
-
+        
       containers:
       - name: <CONTAINER_NAME>
         image: <IMAGE_URL>
