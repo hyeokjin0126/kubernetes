@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: <NAME>
+  namespace: <NAMESPACE_NAME>
+spec:
+  serviceName: "<SERVICE_NAME>"
+  replicas: 2
+  selector:
+    matchLabels:
+      <POD_KEY>: <POD_VALUE>
+  template:
+    metadata:
+      labels:
+        <POD_KEY>: <POD_VALUE>
+    spec:
+      tolerations:
+      - key: "<NODE_KEY>"
+        operator: "Equal"
+        value: "<NODE_VALUE>"
+        effect: "NoSchedule"
+
+      nodeSelector:
+        node: app
+
+      containers:
+      - name: <CONTAINER_NAME>
+        image: <IMAGE_URL>
+        ports:
+        - containerPort: <PORT>
