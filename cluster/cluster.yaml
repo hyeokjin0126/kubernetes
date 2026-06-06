@@ -38,10 +38,11 @@ vpc:
 
 managedNodeGroups:
   - name: <NODEGROUP_NAME>
-    labels: { <KEY>: <VALUE> }
     instanceName: <NODEGROUP_NAME>
     instanceType: <INSTANCE_TYPE>
     desiredCapacity: 2
     minSize: 2
     maxSize: 20
     privateNetworking: true
+    labels: 
+      <KEY>: <NAME>
