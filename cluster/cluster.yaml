@@ -6,6 +6,9 @@ metadata:
   version: "<EKS_CLUSTER_VERSION>"
   region: <REGION_CODE>
 
+secretsEncryption:
+  keyARN: <KMS_ARN>
+
 cloudWatch:
   clusterLogging:
     enableTypes: ["*"]
